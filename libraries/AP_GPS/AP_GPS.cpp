@@ -41,6 +41,7 @@
 #include "AP_GPS_MAV.h"
 #include "AP_GPS_MSP.h"
 #include "AP_GPS_ExternalAHRS.h"
+#include "AP_GPS_JAVAD_GREIS.h"
 #include "GPS_Backend.h"
 #if AP_SIM_GPS_ENABLED
 #include "AP_GPS_SITL.h"
@@ -555,6 +556,9 @@ void AP_GPS::send_blob_start(uint8_t instance)
 #if AP_GPS_GSOF_ENABLED
     case GPS_TYPE_GSOF:
 #endif //AP_GPS_GSOF_ENABLED
+#if AP_GPS_JAVAD_GREIS_ENABLED
+    case GPS_TYPE_JAVAD_GREIS:
+#endif // AP_GPS_JAVAD_GREIS_ENABLED
 #if AP_GPS_NOVA_ENABLED
     case GPS_TYPE_NOVA:
 #endif //AP_GPS_NOVA_ENABLED
@@ -730,6 +734,10 @@ AP_GPS_Backend *AP_GPS::_detect_instance(const uint8_t instance)
     case GPS_TYPE_NOVA:
         return NEW_NOTHROW AP_GPS_NOVA(*this, params[instance], state[instance], port);
 #endif //AP_GPS_NOVA_ENABLED
+#if AP_GPS_JAVAD_GREIS_ENABLED
+    case GPS_TYPE_JAVAD_GREIS:
+        return NEW_NOTHROW AP_GPS_JAVAD_GREIS(*this, params[instance], state[instance], port);
+#endif // AP_GPS_JAVAD_GREIS_ENABLED
 
 #if AP_SIM_GPS_ENABLED
     case GPS_TYPE_SITL:
@@ -2020,7 +2028,7 @@ bool AP_GPS::gps_yaw_deg(uint8_t instance, float &yaw_deg, float &accuracy_deg, 
     // @Param: _TYPE
     // @DisplayName: 1st GPS type
     // @Description: GPS type of 1st GPS.Renamed in 4.6 and later to GPS1_TYPE
-    // @Values: 0:None,1:AUTO,2:uBlox,5:NMEA,6:SiRF,7:HIL,8:SwiftNav,9:DroneCAN,10:SBF,11:GSOF,13:ERB,14:MAV,15:NOVA,16:HemisphereNMEA,17:uBlox-MovingBaseline-Base,18:uBlox-MovingBaseline-Rover,19:MSP,20:AllyStar,21:ExternalAHRS,22:DroneCAN-MovingBaseline-Base,23:DroneCAN-MovingBaseline-Rover,24:UnicoreNMEA,25:UnicoreMovingBaselineNMEA,26:SBF-DualAntenna
+    // @Values: 0:None,1:AUTO,2:uBlox,5:NMEA,6:SiRF,7:HIL,8:SwiftNav,9:DroneCAN,10:SBF,11:GSOF,13:ERB,14:MAV,15:NOVA,16:HemisphereNMEA,17:uBlox-MovingBaseline-Base,18:uBlox-MovingBaseline-Rover,19:MSP,20:AllyStar,21:ExternalAHRS,22:DroneCAN-MovingBaseline-Base,23:DroneCAN-MovingBaseline-Rover,24:UnicoreNMEA,25:UnicoreMovingBaselineNMEA,26:SBF-DualAntenna,27:JavadGREIS
     // @RebootRequired: True
     // @User: Advanced
     // @Legacy: only included here so GCSs running stable can get the description.  Omitted in the Wiki.

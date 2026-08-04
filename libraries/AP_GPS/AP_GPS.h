@@ -59,6 +59,7 @@ class AP_GPS
     friend class AP_GPS_NOVA;
     friend class AP_GPS_PX4;
     friend class AP_GPS_SBF;
+    friend class AP_GPS_JAVAD_GREIS;
     friend class AP_GPS_SBP;
     friend class AP_GPS_SBP2;
     friend class AP_GPS_SIRF;
@@ -110,6 +111,7 @@ public:
         GPS_TYPE_UNICORE_NMEA = 24,
         GPS_TYPE_UNICORE_MOVINGBASE_NMEA = 25,
         GPS_TYPE_SBF_DUAL_ANTENNA = 26,
+        GPS_TYPE_JAVAD_GREIS = 27,
 #if AP_SIM_GPS_ENABLED
         GPS_TYPE_SITL = 100,
 #endif
